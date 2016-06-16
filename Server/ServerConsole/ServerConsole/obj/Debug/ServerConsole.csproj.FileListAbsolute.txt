@@ -1,0 +1,12 @@
+G:\Common\Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.exe.config
+G:\Common\Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.exe
+G:\Common\Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.pdb
+G:\Common\Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.csprojResolveAssemblyReference.cache
+G:\Common\Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.exe
+G:\Common\Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.pdb
+G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.exe.config
+G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.exe
+G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.pdb
+G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.exe
+G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.pdb
+G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.csprojResolveAssemblyReference.cache
