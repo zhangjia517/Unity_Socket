@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Net.Sockets;
 using UnityEngine;
 
@@ -11,11 +12,14 @@ public class ClientHandler : MonoBehaviour
     public string message = "";
     public string sendMsg = "";
 
+    //public GUIStyle guiStyle = null;
+    private Queue myQueue = new Queue();
+
     private void OnGUI()
     {
         nickName = GUI.TextField(new Rect(10, 10, 100, 20), nickName);
-        message = GUI.TextArea(new Rect(10, 40, 300, 200), message);
-        sendMsg = GUI.TextField(new Rect(10, 250, 210, 20), sendMsg);
+        message = GUI.TextArea(new Rect(10, 40, 300, 350), message);
+        sendMsg = GUI.TextField(new Rect(10, 400, 210, 20), sendMsg);
         if (GUI.Button(new Rect(120, 10, 80, 20), "Connect"))
         {
             //Debug.Log("hello");
@@ -26,7 +30,7 @@ public class ClientHandler : MonoBehaviour
             SendMessage(nickName);
             this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
         };
-        if (GUI.Button(new Rect(230, 250, 80, 20), "Send"))
+        if (GUI.Button(new Rect(230, 400, 80, 20), "Send"))
         {
             SendMessage(sendMsg);
             sendMsg = "";
@@ -38,7 +42,7 @@ public class ClientHandler : MonoBehaviour
         try
         {
             NetworkStream ns = this._client.GetStream();
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] data = System.Text.Encoding.UTF8.GetBytes(message);
             ns.Write(data, 0, data.Length);
             ns.Flush();
         }
@@ -59,13 +63,32 @@ public class ClientHandler : MonoBehaviour
             }
             else
             {
-                Debug.Log(System.Text.Encoding.ASCII.GetString(data, 0, bytesRead));
-                message += System.Text.Encoding.ASCII.GetString(data, 0, bytesRead);
+                Debug.Log(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
+
+                if (myQueue.Count >= 15)
+                {
+                    myQueue.Enqueue(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
+                    myQueue.Dequeue();
+                }
+                else
+                {
+                    myQueue.Enqueue(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
+                }
+                RefreshMessage(myQueue);
             }
             this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
         }
         catch (Exception ex)
         {
+        }
+    }
+
+    public void RefreshMessage(IEnumerable myCollection)
+    {
+        message = "";
+        foreach (string str in myCollection)
+        {
+            message += str;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace SoketDemo
                 }
                 else
                 {
-                    string messageReceived = System.Text.Encoding.ASCII.GetString(data, 0, bytesRead);
+                    string messageReceived = System.Text.Encoding.UTF8.GetString(data, 0, bytesRead);
                     if (ReceiveNick)
                     {
                         this._clientNick = messageReceived;
@@ -78,7 +78,7 @@ namespace SoketDemo
                     ns = this._client.GetStream();
                 }
                 // 对信息进行编码
-                byte[] bytesToSend = System.Text.Encoding.ASCII.GetBytes(message);
+                byte[] bytesToSend = System.Text.Encoding.UTF8.GetBytes(message);
                 ns.Write(bytesToSend, 0, bytesToSend.Length);
                 ns.Flush();
             }
