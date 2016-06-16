@@ -5,39 +5,38 @@ using UnityEngine;
 
 public class ClientHandler : MonoBehaviour
 {
-    private const int portNo = 500;
-    private TcpClient _client;
-    private byte[] data;
     public string nickName = "";
     public string message = "";
     public string sendMsg = "";
-
-    //public GUIStyle guiStyle = null;
+    private const int portNo = 500;
+    private TcpClient _client;
+    private byte[] data;
     private Queue myQueue = new Queue();
 
     private void OnGUI()
     {
-        nickName = GUI.TextField(new Rect(10, 10, 100, 20), nickName);
-        message = GUI.TextArea(new Rect(10, 40, 300, 250), message);
-        sendMsg = GUI.TextField(new Rect(10, 300, 210, 20), sendMsg);
-        if (GUI.Button(new Rect(120, 10, 80, 20), "Connect"))
+        GUI.Label(new Rect(Screen.width / 2 - 150, 5, 500, 20), "Please input your name and Connect :)");
+        nickName = GUI.TextField(new Rect(Screen.width / 2 - 150, 30, 210, 20), nickName);
+        message = GUI.TextArea(new Rect(Screen.width / 2 - 150, 60, 300, 250), message);
+        sendMsg = GUI.TextField(new Rect(Screen.width / 2 - 150, 320, 210, 20), sendMsg);
+
+        if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 30, 75, 20), "Connect"))
         {
-            //Debug.Log("hello");
             this._client = new TcpClient();
             this._client.Connect("192.168.16.150", portNo);
             data = new byte[this._client.ReceiveBufferSize];
-            //SendMessage(txtNick.Text);
-            SendMessage(nickName);
+            SendMsg2Server(nickName);
             this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
         };
-        if (GUI.Button(new Rect(230, 300, 80, 20), "Send"))
+
+        if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 320, 75, 20), "Send"))
         {
-            SendMessage(sendMsg);
+            SendMsg2Server(sendMsg);
             sendMsg = "";
         };
     }
 
-    public void SendMessage(string message)
+    public void SendMsg2Server(string message)
     {
         try
         {
@@ -65,7 +64,7 @@ public class ClientHandler : MonoBehaviour
             {
                 Debug.Log(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
 
-                if (myQueue.Count >= 16)
+                if (myQueue.Count >= 16) //行数
                 {
                     myQueue.Enqueue(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
                     myQueue.Dequeue();
