@@ -46,7 +46,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-Library/
-Temp/
-ProjectSettings/
-Build/
+/Client/Library/
+/Client/Temp/
+/Client/ProjectSettings/
+/Client/Build/
