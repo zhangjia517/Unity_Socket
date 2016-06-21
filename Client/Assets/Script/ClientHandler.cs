@@ -47,6 +47,7 @@ public class ClientHandler : MonoBehaviour
         }
         catch (Exception ex)
         {
+            Debug.Log(ex);
         }
     }
 
@@ -79,6 +80,7 @@ public class ClientHandler : MonoBehaviour
         }
         catch (Exception ex)
         {
+            Debug.Log(ex);
         }
     }
 
