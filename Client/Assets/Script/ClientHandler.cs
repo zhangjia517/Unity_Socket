@@ -8,7 +8,7 @@ public class ClientHandler : MonoBehaviour
     public string nickName = "";
     public string message = "";
     public string sendMsg = "";
-    private const int portNo = 500;
+    private const int portNo = 5819;//500 5819
     private TcpClient _client;
     private byte[] data;
     private Queue myQueue = new Queue();
