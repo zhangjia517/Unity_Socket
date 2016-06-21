@@ -57,7 +57,7 @@ function broadcast(message)
 	}
 }  
 
-chatServer.listen(5819,'192.168.16.150', function() 
+chatServer.listen(5819, function() 
 { 
-	console.log('Server on 192.168.16.150:5819 is starting...');
+	console.log('Server is starting...');
 });
