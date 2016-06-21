@@ -23,7 +23,7 @@ public class ClientHandler : MonoBehaviour
         if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 30, 75, 20), "Connect"))
         {
             this._client = new TcpClient();
-            this._client.Connect("192.168.16.150", portNo);
+            this._client.Connect("192.168.16.150", portNo);//111.203.161.35    192.168.16.150
             data = new byte[this._client.ReceiveBufferSize];
             SendMsg2Server(nickName);
             this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);

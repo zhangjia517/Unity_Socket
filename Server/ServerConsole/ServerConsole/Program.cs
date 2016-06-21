@@ -11,7 +11,8 @@ namespace SoketDemo
         private static void Main(string[] args)
         {
             // 初始化服务器IP
-            System.Net.IPAddress localAdd = System.Net.IPAddress.Parse("192.168.16.150");//192.168.16.150
+            System.Net.IPAddress localAdd = System.Net.IPAddress.Parse("192.168.16.150");
+            //System.Net.IPAddress localAdd = System.Net.Dns.GetHostAddresses(System.Net.Dns.GetHostName())[0];
             // 创建TCP侦听器
             TcpListener listener = new TcpListener(localAdd, portNo);
             listener.Start();
