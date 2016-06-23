@@ -8,33 +8,11 @@ public class ClientHandler : MonoBehaviour
     public string nickName = "";
     public string message = "";
     public string sendMsg = "";
-    private const int portNo = 5819;//500 5819
-    private TcpClient _client;
+
     private byte[] data;
+    private TcpClient _client;
+    private const int portNo = 5819;
     private Queue myQueue = new Queue();
-
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(Screen.width / 2 - 150, 5, 500, 20), "Please input your name and Connect :)");
-        nickName = GUI.TextField(new Rect(Screen.width / 2 - 150, 30, 210, 20), nickName);
-        message = GUI.TextArea(new Rect(Screen.width / 2 - 150, 60, 300, 250), message);
-        sendMsg = GUI.TextField(new Rect(Screen.width / 2 - 150, 320, 210, 20), sendMsg);
-
-        if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 30, 75, 20), "Connect"))
-        {
-            this._client = new TcpClient();
-            this._client.Connect("182.92.8.213", portNo);
-            data = new byte[this._client.ReceiveBufferSize];
-            SendMsg2Server(nickName);
-            this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
-        };
-
-        if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 320, 75, 20), "Send"))
-        {
-            SendMsg2Server(sendMsg);
-            sendMsg = "";
-        };
-    }
 
     public void SendMsg2Server(string message)
     {
@@ -91,5 +69,28 @@ public class ClientHandler : MonoBehaviour
         {
             message += str;
         }
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(Screen.width / 2 - 150, 5, 500, 20), "Please input your name and connect :)");
+        nickName = GUI.TextField(new Rect(Screen.width / 2 - 150, 30, 210, 20), nickName);
+        message = GUI.TextArea(new Rect(Screen.width / 2 - 150, 60, 300, 250), message);
+        sendMsg = GUI.TextField(new Rect(Screen.width / 2 - 150, 320, 210, 20), sendMsg);
+
+        if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 30, 75, 20), "Connect"))
+        {
+            this._client = new TcpClient();
+            this._client.Connect("182.92.8.213", portNo);
+            data = new byte[this._client.ReceiveBufferSize];
+            SendMsg2Server(nickName);
+            this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
+        };
+
+        if (GUI.Button(new Rect(Screen.width / 2 + 230 - 155, 320, 75, 20), "Send"))
+        {
+            SendMsg2Server(sendMsg);
+            sendMsg = "";
+        };
     }
 }
