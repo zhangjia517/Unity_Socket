@@ -33,7 +33,6 @@ public class ClientHandler : MonoBehaviour
     {
         try
         {
-
             int bytesRead;
             bytesRead = this._client.GetStream().EndRead(ar);
             if (bytesRead < 1)
