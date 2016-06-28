@@ -15,6 +15,7 @@ public class ChatInput : MonoBehaviour
     private TcpClient _client;
     private const int portNo = 5819;
     private Queue myQueue = new Queue();
+    private string message = "";
 
     private void Start()
     {
@@ -24,16 +25,23 @@ public class ChatInput : MonoBehaviour
 
     public void OnSubmit()
     {
+        if (_client == null) return;
         SendMsg2Server(mInput.value);
+        mInput.value = "";
     }
 
     public void OnConnect()
     {
+        if (_client != null) return;
+
         this._client = new TcpClient();
+        if (_client.Connected) return;
+
         this._client.Connect("182.92.8.213", portNo);
         data = new byte[this._client.ReceiveBufferSize];
         SendMsg2Server(m_IptUsername.value);
         this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
+        mInput.isSelected = true;
     }
 
     public void ReceiveMessage(IAsyncResult ar)
@@ -49,17 +57,7 @@ public class ChatInput : MonoBehaviour
             else
             {
                 Debug.Log(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
-
-                if (myQueue.Count >= 16) //ÐÐÊý
-                {
-                    myQueue.Enqueue(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
-                    myQueue.Dequeue();
-                }
-                else
-                {
-                    myQueue.Enqueue(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
-                }
-                RefreshMessage(myQueue);
+                message = System.Text.Encoding.UTF8.GetString(data, 0, bytesRead);
             }
             this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
         }
@@ -86,24 +84,19 @@ public class ChatInput : MonoBehaviour
 
     public void RefreshMessage(IEnumerable myCollection)
     {
-        string message = "";
+        message = "";
         foreach (string str in myCollection)
         {
             message += str;
         }
+    }
 
-        textList.textLabel.text = message;
-
-        //if (textList != null)
-        //{
-        //    //string text = NGUIText.StripSymbols(message);
-
-        //    if (!string.IsNullOrEmpty(message))
-        //    {
-        //        textList.Add(message);
-        //        mInput.value = "";
-        //        mInput.isSelected = false;
-        //    }
-        //}
+    private void Update()
+    {
+        if (message != "!!!@@@###$$$%%%")
+        {
+            textList.Add(message.Trim());
+            message = "!!!@@@###$$$%%%";
+        }
     }
 }
