@@ -55,7 +55,7 @@ public class ChatInput : MonoBehaviour
             }
             else
             {
-                Debug.Log(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));
+                /*Debug.Log(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));*/
                 message = System.Text.Encoding.UTF8.GetString(data, 0, bytesRead);
             }
             this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
