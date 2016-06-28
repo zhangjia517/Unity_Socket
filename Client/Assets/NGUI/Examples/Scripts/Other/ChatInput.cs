@@ -33,13 +33,13 @@ public class ChatInput : MonoBehaviour
     {
         if (_client != null) return;
 
-        this._client = new TcpClient();
+        _client = new TcpClient();
         if (_client.Connected) return;
 
-        this._client.Connect("182.92.8.213", portNo);
-        data = new byte[this._client.ReceiveBufferSize];
+        _client.Connect("182.92.8.213", portNo);
+        data = new byte[_client.ReceiveBufferSize];
         SendMsg2Server(m_IptUsername.value);
-        this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
+        _client.GetStream().BeginRead(data, 0, Convert.ToInt32(_client.ReceiveBufferSize), ReceiveMessage, null);
         mInput.isSelected = true;
     }
 
@@ -58,7 +58,7 @@ public class ChatInput : MonoBehaviour
                 /*Debug.Log(System.Text.Encoding.UTF8.GetString(data, 0, bytesRead));*/
                 message = System.Text.Encoding.UTF8.GetString(data, 0, bytesRead);
             }
-            this._client.GetStream().BeginRead(data, 0, System.Convert.ToInt32(this._client.ReceiveBufferSize), ReceiveMessage, null);
+            _client.GetStream().BeginRead(data, 0, Convert.ToInt32(_client.ReceiveBufferSize), ReceiveMessage, null);
         }
         catch (Exception ex)
         {
