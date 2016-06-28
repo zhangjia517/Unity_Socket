@@ -14,7 +14,6 @@ public class ChatInput : MonoBehaviour
     private byte[] data;
     private TcpClient _client;
     private const int portNo = 5819;
-    private Queue myQueue = new Queue();
     private string message = "";
 
     private void Start()
