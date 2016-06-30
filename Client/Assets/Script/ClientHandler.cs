@@ -9,6 +9,7 @@ public class ClientHandler : MonoBehaviour
     public string message = "";
     public string sendMsg = "";
 
+	
     private byte[] data;
     private TcpClient _client;
     private const int portNo = 5819;
