@@ -2,6 +2,7 @@
 var chatServer = net.createServer()
 	var clientList = [];
 
+	
 chatServer.on('connection', function (client) {
 	console.log(client.localAddress + ':' + client.remotePort + ' is joined');
 	clientList.push(client);
