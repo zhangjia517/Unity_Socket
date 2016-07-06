@@ -8,7 +8,7 @@ public class ClientHandler : MonoBehaviour
     public string nickName = "";
     public string message = "";
     public string sendMsg = "";
-
+	
 	
     private byte[] data;
     private TcpClient _client;
