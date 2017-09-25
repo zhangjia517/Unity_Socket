@@ -6,7 +6,9 @@ namespace ServerConsole
 {
     internal class Program
     {
-        // 设置连接端口
+        /// <summary>
+        /// 连接端口
+        /// </summary>
         private const int PortNo = 5819;
 
         private static void Main()

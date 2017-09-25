@@ -7,12 +7,35 @@ namespace ServerConsole
 {
     internal class ChatClient
     {
-        public static Hashtable AllClients = new Hashtable(); // 客户列表
-        private readonly TcpClient _client; // 客户端实体
-        private readonly byte[] _data; // 消息数据
-        private string _clientNick; // 客户端昵称
+        /// <summary>
+        /// 客户列表
+        /// </summary>
+        public static Hashtable AllClients = new Hashtable();
+
+        /// <summary>
+        /// 客户端实体
+        /// </summary>
+        private readonly TcpClient _client;
+
+        /// <summary>
+        /// 消息数据
+        /// </summary>
+        private readonly byte[] _data;
+
+        /// <summary>
+        /// 客户端昵称
+        /// </summary>
+        private string _clientNick;
+
+        /// <summary>
+        /// 是否昵称
+        /// </summary>
         private bool _receiveNick = true;
-        public string ClientIp; // 客户端IP
+
+        /// <summary>
+        /// 客户端IP
+        /// </summary>
+        public string ClientIp;
 
         public ChatClient(TcpClient client)
         {
@@ -25,7 +48,10 @@ namespace ServerConsole
             client.GetStream().BeginRead(_data, 0, Convert.ToInt32(_client.ReceiveBufferSize), ReceiveMessage, null);
         }
 
-        // 从客戶端获取消息
+        /// <summary>
+        /// 从客戶端获取消息
+        /// </summary>
+        /// <param name="ar"></param>
         public void ReceiveMessage(IAsyncResult ar)
         {
             try
@@ -65,7 +91,10 @@ namespace ServerConsole
             }
         }
 
-        // 向客戶端发送消息
+        /// <summary>
+        /// 向客戶端发送消息
+        /// </summary>
+        /// <param name="message"></param>
         public void SendMessage(string message)
         {
             try
@@ -86,7 +115,10 @@ namespace ServerConsole
             }
         }
 
-        // 向客户端广播消息
+        /// <summary>
+        /// 向客户端广播消息
+        /// </summary>
+        /// <param name="message"></param>
         public void Broadcast(string message)
         {
             Console.WriteLine(message);
