@@ -1,29 +1,31 @@
 ﻿using System;
+using System.Net;
 using System.Net.Sockets;
 
-namespace SoketDemo
+namespace ServerConsole
 {
     internal class Program
     {
         // 设置连接端口
-        private const int portNo = 5819;
+        private const int PortNo = 5819;
 
-        private static void Main(string[] args)
+        private static void Main()
         {
             // 初始化服务器IP
-            System.Net.IPAddress localAdd = System.Net.IPAddress.Parse("127.0.0.1");
+            var localAdd = IPAddress.Parse("127.0.0.1");
             // 创建TCP侦听器
-            TcpListener listener = new TcpListener(localAdd, portNo);
+            var listener = new TcpListener(localAdd, PortNo);
             listener.Start();
             // 显示服务器启动信息
             Console.WriteLine("Server is starting...");
             // 循环接受客户端的连接请求
             while (true)
             {
-                ChatClient user = new ChatClient(listener.AcceptTcpClient());
+                var user = new ChatClient(listener.AcceptTcpClient());
                 // 显示连接客户端的IP与端口
-                Console.WriteLine(user._clientIP + " is joined");
+                Console.WriteLine(user.ClientIp + " is joined");
             }
+            // ReSharper disable once FunctionNeverReturns
         }
     }
 }

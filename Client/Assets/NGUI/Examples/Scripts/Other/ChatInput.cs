@@ -36,7 +36,7 @@ public class ChatInput : MonoBehaviour
         _client = new TcpClient();
         if (_client.Connected) return;
 
-        _client.Connect("182.92.8.213", portNo);
+        _client.Connect("127.0.0.1", portNo);
         data = new byte[_client.ReceiveBufferSize];
         SendMsg2Server(m_IptUsername.value);
         _client.GetStream().BeginRead(data, 0, Convert.ToInt32(_client.ReceiveBufferSize), ReceiveMessage, null);

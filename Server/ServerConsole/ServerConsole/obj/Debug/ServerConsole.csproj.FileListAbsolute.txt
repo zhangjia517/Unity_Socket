@@ -13,7 +13,6 @@ G:\Common\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsol
 D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.exe.config
 D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.exe
 D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\bin\Debug\ServerConsole.pdb
-D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.csprojResolveAssemblyReference.cache
 D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.csproj.CoreCompileInputs.cache
 D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.exe
 D:\Github\Unity_Socket\Server\ServerConsole\ServerConsole\obj\Debug\ServerConsole.pdb
