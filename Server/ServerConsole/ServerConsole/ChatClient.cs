@@ -67,6 +67,7 @@ namespace ServerConsole
                     Broadcast(_clientNick + " has left the chat");
                     return;
                 }
+
                 var messageReceived = Encoding.UTF8.GetString(_data, 0, bytesRead);
                 if (_receiveNick)
                 {
@@ -78,6 +79,7 @@ namespace ServerConsole
                 {
                     Broadcast(_clientNick + ">" + messageReceived);
                 }
+
                 lock (_client.GetStream())
                 {
                     _client.GetStream().BeginRead(_data, 0, Convert.ToInt32(_client.ReceiveBufferSize), ReceiveMessage,
